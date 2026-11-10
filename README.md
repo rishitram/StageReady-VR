@@ -6,7 +6,7 @@ You can try the room in a regular desktop browser or, with a compatible headset 
 
 ## What you can do
 
-- Upload a PDF and move through its pages while you practice. The current file limit is 20 MB.
+- Upload a PDF or slideshow and move through its pages while you practice. The current file limit is 20 MB.
 - Look around a 3D practice room with a board and a seated audience.
 - Start, pause, resume, and end a timed practice session.
 - Review a summary of how long you faced the audience and the board. It tracks head direction and eye contact.
