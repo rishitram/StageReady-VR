@@ -9,7 +9,7 @@ You can try the room in a regular desktop browser or, with a compatible headset 
 - Upload a PDF and move through its pages while you practice. The current file limit is 20 MB.
 - Look around a 3D practice room with a board and a seated audience.
 - Start, pause, resume, and end a timed practice session.
-- Review a summary of how long you faced the audience and the board. It tracks head direction, not eye contact.
+- Review a summary of how long you faced the audience and the board. It tracks head direction and eye contact.
 - Optionally record your practice audio in the browser and download it afterward.
 - Optionally talk with a live audience member powered by ElevenLabs.
 - Optionally request a written AI coaching summary based on session timing measurements.
@@ -41,22 +41,6 @@ Immersive WebXR needs a compatible browser and a trusted HTTPS connection. `loca
 
 The desktop preview is useful for trying the room, but it does not verify headset tracking, microphone behavior, or VR performance. Those need to be tested on the actual device.
 
-## Optional features
-
-The basic PDF and practice-room flow does not need API keys. These features require separate provider setup and may not be enabled on a hosted copy.
-
-### Voice Q&A
-
-Voice Q&A needs a public ElevenLabs conversational agent, microphone permission, and the site's domain allowed in that agent's settings. To configure it for local development, copy `app/.env.example` to `app/.env.local`, set `VITE_ELEVENLABS_AGENT_ID` to your public agent ID, and restart Vite. The example value is an agent ID, not an API key.
-
-The agent hears your microphone audio, but it does not receive your PDF, its pages, or extracted text. A microphone call is optional and begins only when you choose to start it.
-
-### AI coaching
-
-The session summary includes local feedback without any provider setup. To enable the additional AI-written summary, configure `ASSEMBLYAI_API_KEY` in `app/.env.local` and run the Vite server. This key is server-only: do not rename it to a `VITE_` variable or put it in browser code.
-
-When AI coaching is enabled, the server sends aggregate timing measurements to AssemblyAI. It does not send the PDF, recorded audio, or raw headset poses. Static hosting by itself does not provide the API route, so the feature needs a server that supports the project's `/api/presentation-summary` handler.
-
 ## Your files and privacy
 
 - PDFs are rendered locally in the browser and are not uploaded to a project backend.
@@ -71,25 +55,6 @@ The app is a client-side React and TypeScript application built with Vite. Three
 
 The optional voice feature uses the ElevenLabs React SDK and WebRTC. AI coaching is provided through a small Vite server middleware route, which keeps the AssemblyAI API key out of the browser. The room also records session timing and head-orientation data for its local summary.
 
-## Current limitations
-
-- Voice Q&A and AI coaching need provider configuration; neither is required for basic practice.
-- VR requires a supported headset browser and HTTPS. A successful desktop run is not proof that a headset setup works.
-- Head-orientation summaries describe where your head was pointing, not where your eyes were looking.
-- Automatic chart extraction, hand-based movement of PDF figures, live speech scoring, and moving a PDF from a computer to a separate headset are not part of the current app.
-
-## For contributors
-
-From `app/`, run the available project checks:
-
-```sh
-npm run build
-npm run lint
-node --test src/audience/*.test.mjs src/session/*.test.mjs src/xr/*.test.mjs server/*.test.mjs
-```
-
-For details on the existing app structure and integration behavior, see [`app/README.md`](app/README.md). Historical planning notes are in [`SETUP.md`](SETUP.md); the current project scope and interfaces are recorded in [`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md).
-
 ## Team
 
-Built by Rishi, Yuhaen, and Karl.
+Built by Rishi Ramachandran, Yuhaen Bhaskaran, and Karl Chen.
